@@ -15,7 +15,7 @@ function shib_auth_provisioning_menu() {
  return $items;
 }
 
-function shib_auth_admin_provisioning(&$form_state) {
+function shib_auth_admin_provisioning($form, &$form_state) {
 	$form = array();
 
 	$form['user_info'] = array(
@@ -35,14 +35,14 @@ function shib_auth_admin_provisioning(&$form_state) {
 
 function shib_auth_admin_provisioning_submit($form, &$form_state) {
 
-  if($form_state['values']['op'] == t('Register')) {		
+  if ($form_state['values']['op'] == t('Register')) {		
     $lines = explode("\n", $form_state['values']['user_info']);		
     if (!empty($lines)) {
       for ($i = 0; $i < count($lines); $i++) {
         preg_match_all('~(.*)\|(.*)~', $lines[$i], $matches);
         if (!empty($matches) && $matches[1][0] != '' && $matches[2][0] != '') {
           shib_auth_save_authmap(check_plain($matches[1][0]), check_plain($matches[1][0]), check_plain($matches[2][0]));
-          session_save_session(FALSE);
+          drupal_save_session(FALSE);
         }
       }
     }

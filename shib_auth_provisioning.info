@@ -2,5 +2,5 @@ name = Shibboleth Auth Provisioning
 description = Helper module for Shiboleth to allow account provisioning
 
 dependencies[] = shib_auth
-core = 6.x
+core = 7.x
 package = Shibboleth
